@@ -13,7 +13,7 @@
  2020-03-02 22:08:24.614840+0100 QRIMAGE2[55027:14402870] Metal API Validation Enabled
  2020-03-02 22:08:28.263513+0100 QRIMAGE2[55027:14402974] [access] This app has crashed because it attempted to access privacy-sensitive data without a usage description.  The app's Info.plist must contain an NSPhotoLibraryAddUsageDescription key with a string value explaining to the user how the app uses this data.
 
-// added ...
+ // added ...
      <key>NSPhotoLibraryAddUsageDescription</key>
      <string>APP WANTS TO STORE IMAGE TO YOUR PHOTO LIBRARY</string>
  </dict>
@@ -99,5 +99,66 @@ class ViewController: UIViewController {
         activityViewController.popoverPresentationController?.sourceView = view // so that iPads won't crash
 
         present(activityViewController, animated: true, completion: nil)
+    }
+
+    // MARK: from FlashViewController
+
+    /*
+     2020-03-02 22:45:42.649596+0100 QRIMAGE2[57179:14448603] Metal API Validation Enabled
+     2020-03-02 22:45:45.239830+0100 QRIMAGE2[57179:14448603] -[QRIMAGE2.ViewController save:]: unrecognized selector sent to instance 0x7fe63e2014d0
+     2020-03-02 22:45:45.263619+0100 QRIMAGE2[57179:14448603] *** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[QRIMAGE2.ViewController save:]: unrecognized selector sent to instance 0x7fe63e2014d0'
+     */
+
+    var tagImage: UIImage?
+    let privateUrl = "corona"
+    let selectedCalendarTitle = "october"
+
+    @IBAction func exportBtnPressed(_: Any) {
+        tagImage = generateQrImage(from: "\(privateUrl):// \(selectedCalendarTitle)")
+
+        saveQRCodeImage()
+    }
+
+    @objc func saveQRCodeImage() {
+        guard tagImage != nil else { return }
+
+        UIImageWriteToSavedPhotosAlbum(tagImage!, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+
+    @objc func image2(_ image: UIImage, didFinishSavingWithError err: Error?, contextInfo: UnsafeRawPointer) {
+        if let err = err {
+            // we got back an error !
+            presentAlert(title: "Error", message: err.localizedDescription)
+        } else {
+            presentAlert(title: "QR Code Image exported", message: "Check your Photo Library")
+            print("QR Code saved successfully")
+        }
+    }
+
+    func presentAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
+    func generateQrImage(from text: String) -> UIImage? {
+        // Core Image Filter Reference says:
+        // To create a QR code from a string or URL, convert it to an NSData object using NSISOLatin1StringEncoding.
+
+        let data = text.data(using: .isoLatin1)
+        // let data = "\(privateUrl)://\(encodedCalendarTitle)"
+
+        guard let filter = CIFilter(name: "CIQRCodeGenerator") else {
+            return nil
+        }
+        filter.setValue(data, forKey: "inputMessage")
+
+        let scale = CGFloat(17.29) // aiming at ~300 dpi when printed unscaled
+        let transform = CGAffineTransform(scaleX: scale, y: scale)
+
+        guard let output = filter.outputImage?.transformed(by: transform) else {
+            return nil
+        }
+        return UIImage(ciImage: output)
     }
 }

@@ -29,6 +29,17 @@
                                 <rect key="frame" x="87" y="74" width="240" height="226"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jg-PE-dsp">
+                                <rect key="frame" x="142" y="587" width="115" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Export image"/>
+                                <connections>
+                                    <action selector="exportBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dVE-ne-WF6"/>
+                                    <action selector="save:" destination="BYZ-38-t0r" eventType="touchUpInside" id="O6m-TW-db3"/>
+                                    <action selector="saveQRcode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qiU-tP-Um4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
