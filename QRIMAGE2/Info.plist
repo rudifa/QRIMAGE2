@@ -60,5 +60,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>APP WANTS TO STORE IMAGE TO YOUR PHOTO LIBRARY</string>
 </dict>
 </plist>
