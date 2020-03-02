@@ -44,13 +44,25 @@ class QRCodeGenerator {
 }
 
 class ViewController: UIViewController {
+    // from original code
     @IBOutlet var imageView: UIImageView!
-
     var imgQrCode: UIImage!
+
+    // from FlashViewController
+    @IBOutlet var tagImageView: UIImageView!
+    var tagImage: UIImage?
+    let privateUrl = "corona"
+    let selectedCalendarTitle = "october"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // from original code
         generateQRCodeFromString()
+
+        // from FlashViewController
+        tagImage = generateQrImage(from: "\(privateUrl):// \(selectedCalendarTitle)")
+        tagImageView.image = tagImage
     }
 
     func generateQRCodeFromString() {
@@ -103,18 +115,7 @@ class ViewController: UIViewController {
 
     // MARK: from FlashViewController
 
-    /*
-     2020-03-02 22:45:42.649596+0100 QRIMAGE2[57179:14448603] Metal API Validation Enabled
-     2020-03-02 22:45:45.239830+0100 QRIMAGE2[57179:14448603] -[QRIMAGE2.ViewController save:]: unrecognized selector sent to instance 0x7fe63e2014d0
-     2020-03-02 22:45:45.263619+0100 QRIMAGE2[57179:14448603] *** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[QRIMAGE2.ViewController save:]: unrecognized selector sent to instance 0x7fe63e2014d0'
-     */
-
-    var tagImage: UIImage?
-    let privateUrl = "corona"
-    let selectedCalendarTitle = "october"
-
     @IBAction func exportBtnPressed(_: Any) {
-        tagImage = generateQrImage(from: "\(privateUrl):// \(selectedCalendarTitle)")
 
         saveQRCodeImage()
     }

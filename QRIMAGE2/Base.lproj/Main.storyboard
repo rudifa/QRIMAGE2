@@ -16,17 +16,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8y-7b-2Er">
-                                <rect key="frame" x="149" y="525" width="101" height="36"/>
+                                <rect key="frame" x="149" y="279" width="101" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Save image"/>
                                 <connections>
-                                    <action selector="save:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eXm-8z-gj5"/>
                                     <action selector="saveQRcode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3ii-Ww-pgc"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0hg-1S-cp6">
-                                <rect key="frame" x="87" y="74" width="240" height="226"/>
+                                <rect key="frame" x="95" y="85" width="209" height="168"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jg-PE-dsp">
@@ -36,16 +35,19 @@
                                 <state key="normal" title="Export image"/>
                                 <connections>
                                     <action selector="exportBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dVE-ne-WF6"/>
-                                    <action selector="save:" destination="BYZ-38-t0r" eventType="touchUpInside" id="O6m-TW-db3"/>
-                                    <action selector="saveQRcode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qiU-tP-Um4"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EV6-hb-oVg">
+                                <rect key="frame" x="103" y="401" width="209" height="168"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="0hg-1S-cp6" id="YTt-7o-Aw3"/>
+                        <outlet property="tagImageView" destination="EV6-hb-oVg" id="OPU-EE-VLu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
